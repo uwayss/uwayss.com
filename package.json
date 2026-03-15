@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "format": "prettier --write .",
+    "format": "prettier --write . --log-level warn",
     "types": "tsc --noEmit",
     "checks": "pnpm format && pnpm lint && pnpm types",
     "preview": "vite preview",
