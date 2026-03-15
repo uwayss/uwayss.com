@@ -9,7 +9,7 @@
     "lint": "eslint .",
     "format": "prettier --write .",
     "types": "tsc --noEmit",
-    "checks": "npm run format && npm run lint && npm run types",
+    "checks": "pnpm format && pnpm lint && pnpm types",
     "preview": "vite preview",
     "get-readme": "sh -c 'curl -s -L -o public/README.md https://raw.githubusercontent.com/$0/$0/main/README.md'"
   },
