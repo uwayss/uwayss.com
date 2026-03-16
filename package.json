@@ -9,7 +9,7 @@
     "lint": "eslint .",
     "format": "prettier --write . --log-level warn",
     "types": "tsc --noEmit",
-    "checks": "pnpm format && pnpm lint && pnpm types",
+    "checks": "pnpm format && pnpm lint && pnpm types && cd analytics-api && pnpm checks",
     "preview": "vite preview",
     "get-readme": "sh -c 'curl -s -L -o public/README.md https://raw.githubusercontent.com/$0/$0/main/README.md'"
   },
