@@ -4,6 +4,7 @@ import './index.css';
 
 function App() {
   const [content, setContent] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     // Tracking UTM parameters
@@ -27,14 +28,36 @@ function App() {
 
     fetch('/README.md')
       .then((res) => res.text())
-      .then((text) => setContent(text))
-      .catch((err) => console.error('Failed to load README.md:', err));
+      .then((text) => {
+        setContent(text);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        console.error('Failed to load README.md:', err);
+        setIsLoading(false);
+      });
   }, []);
 
   return (
-    <main className="markdown-body">
-      <ReactMarkdown>{content}</ReactMarkdown>
-    </main>
+    <div className="container">
+      <main className={`markdown-body ${!isLoading ? 'loaded' : ''}`}>
+        {!isLoading && <ReactMarkdown>{content}</ReactMarkdown>}
+      </main>
+
+      {!isLoading && (
+        <footer className="footer">
+          <p>
+            © {new Date().getFullYear()} uwayss.com •{' '}
+            <a
+              href="https://github.com/uwayss/uwayss.com"
+              target="_blank"
+              rel="noopener noreferrer">
+              Source
+            </a>
+          </p>
+        </footer>
+      )}
+    </div>
   );
 }
 
