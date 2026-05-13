@@ -46,9 +46,54 @@ body {
 .markdown-body {
   max-width: 680px;
   margin: 0 auto;
-  padding: 80px 24px 20px 24px;
+  padding: 40px 24px 20px 24px;
   opacity: 0;
   transform: translateY(10px);
+}
+
+.lang-switcher {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 40px 24px 0 24px;
+  display: flex;
+  gap: 16px;
+  justify-content: flex-end;
+}
+
+.lang-link {
+  color: var(--link);
+  text-decoration: none;
+  font-size: 0.9em;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.lang-link:hover {
+  color: var(--link-hover);
+  text-decoration: underline;
+}
+
+.lang-link.active {
+  color: var(--text);
+  pointer-events: none;
+  text-decoration: none;
+}
+
+.markdown-body[dir='rtl'] {
+  text-align: right;
+}
+
+.markdown-body[dir='rtl'] ul,
+.markdown-body[dir='rtl'] ol {
+  padding-left: 0;
+  padding-right: 2em;
+}
+
+.markdown-body[dir='rtl'] blockquote {
+  padding-left: 0;
+  padding-right: 1em;
+  border-left: none;
+  border-right: 4px solid var(--border);
 }
 
 .markdown-body.loaded {

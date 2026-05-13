@@ -1,0 +1,5 @@
+[
+  { "code": "en", "label": "In English", "content": "README.md", "path": "/" },
+  { "code": "tr", "label": "Türkçesi", "content": "TR-README.md", "path": "/tr" },
+  { "code": "ar", "label": "بالعربية", "content": "AR-README.md", "path": "/ar" }
+]

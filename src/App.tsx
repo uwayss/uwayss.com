@@ -1,10 +1,17 @@
 import { useState, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
 import './index.css';
+import languages from '../config.json';
 
 function App() {
   const [content, setContent] = useState('');
   const [isLoading, setIsLoading] = useState(true);
+
+  const currentPath = window.location.pathname;
+  const activeLang =
+    languages.find((lang) => lang.path === currentPath) ||
+    languages.find((lang) => lang.path === '/') ||
+    languages[0];
 
   useEffect(() => {
     // Tracking UTM parameters
@@ -26,21 +33,34 @@ function App() {
       }),
     }).catch((err) => console.error('Tracking failed:', err));
 
-    fetch('/README.md')
+    fetch(`/${activeLang.content}`)
       .then((res) => res.text())
       .then((text) => {
         setContent(text);
         setIsLoading(false);
       })
       .catch((err) => {
-        console.error('Failed to load README.md:', err);
+        console.error(`Failed to load ${activeLang.content}:`, err);
         setIsLoading(false);
       });
-  }, []);
+  }, [activeLang.content]);
 
   return (
     <div className="container">
-      <main className={`markdown-body ${!isLoading ? 'loaded' : ''}`}>
+      <nav className="lang-switcher">
+        {languages.map((lang) => (
+          <a
+            key={lang.code}
+            href={lang.path}
+            className={`lang-link ${activeLang.code === lang.code ? 'active' : ''}`}>
+            {lang.label}
+          </a>
+        ))}
+      </nav>
+
+      <main
+        className={`markdown-body ${!isLoading ? 'loaded' : ''}`}
+        dir={activeLang.code === 'ar' ? 'rtl' : 'ltr'}>
         {!isLoading && <ReactMarkdown>{content}</ReactMarkdown>}
       </main>
 
